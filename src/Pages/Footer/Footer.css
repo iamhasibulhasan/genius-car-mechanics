@@ -1,0 +1,29 @@
+.footer {
+    background-color: #1B1B1B;
+    padding: 10px;
+}
+
+.footer-logo {
+    font-size: 1.6rem;
+    color: gray;
+    text-transform: uppercase;
+    font-weight: 500;
+}
+
+.footer-address {
+    color: gray;
+    margin-top: 10px;
+}
+
+.footer-link a {
+    text-decoration: none;
+    display: block;
+    color: gray;
+    font-size: 1rem;
+    transition: padding-left .5s;
+}
+
+.footer-link a:hover {
+    color: #e79800;
+    padding-left: 14px;
+}
