@@ -1,27 +1,35 @@
 import React from 'react';
 import "./Header.css";
-import { Container, Nav, Navbar } from 'react-bootstrap';
+import { Button, Container, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import useAuth from './../../hooks/useAuth';
+import { HashLink } from 'react-router-hash-link';
+
 
 const Header = () => {
-    return (
-        <div>
-            <Navbar bg="light" expand="lg" fixed="top">
-                <Container>
-                    <Navbar.Brand href="#home">Genius Mechanics</Navbar.Brand>
-                    <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                    <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
-                        <Nav>
-                            <Nav.Link className="nav-link" href="#home">Home</Nav.Link>
-                            <Nav.Link className="nav-link" href="#shop">Shop</Nav.Link>
-                            <Nav.Link className="nav-link" href="#contact">Contact</Nav.Link>
-                            <Nav.Link className="nav-link" href="#about">About</Nav.Link>
-                            <Nav.Link className="nav-link" href="#blog">Blog</Nav.Link>
 
-                        </Nav>
+    const { user, logOut } = useAuth();
+    return (
+        <Navbar bg="dark" variant="dark" sticky="top" collapseOnSelect expand="lg">
+                <Container>
+                <Navbar.Brand href="#home">Genius</Navbar.Brand>
+                <Navbar.Toggle />
+                <Navbar.Collapse className="justify-content-end">
+                    <Nav.Link as={HashLink} to="/home#home">Home</Nav.Link>
+                    <Nav.Link as={HashLink} to="/home#services">Services</Nav.Link>
+                    <Nav.Link as={HashLink} to="/home#experts">Our Experts</Nav.Link>
+                    {
+                        user?.email ?
+                            <Button onClick={logOut} variant='light'>Logout</Button> :
+                            <Nav.Link as={HashLink} to="/login">Login</Nav.Link>
+                    }
+
+                    <Navbar.Text>
+                        Signed in as: <a href="#login">{user?.displayName}</a>
+                    </Navbar.Text>
                     </Navbar.Collapse>
                 </Container>
-            </Navbar>
-        </div>
+        </Navbar>
     );
 };
 
